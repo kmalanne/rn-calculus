@@ -1,44 +1,42 @@
 import React, { Component } from 'react';
-import { LayoutAnimation, TouchableWithoutFeedback, Text } from 'react-native';
 import { View } from 'react-native-animatable';
 import { observer } from 'mobx-react/native';
+import BaseButton from '../BaseButton';
 import styles from './index.style';
 
 @observer
 export default class CheckBox extends Component {
   constructor() {
     super();
-    this.state = { checked: false };
+    this.state = { isChecked: false };
   }
 
-  handleOnPress = () => {
+  handleOnPressOut = () => {
     const { onChecked } = this.props;
-    LayoutAnimation.spring();
-    this.setState({ checked: !this.state.checked });
+    this.setState({ isChecked: !this.state.isChecked });
     if (onChecked) {
       onChecked(this.props.text);
     }
   };
 
   render() {
+    const { isChecked } = this.state;
+
+    const backgroundColor = isChecked ? '#FFE320' : '#9F6CE3';
+
+    const textStyle = isChecked ? styles.textChecked : styles.textUnisChecked;
+
     return (
-      <TouchableWithoutFeedback onPress={this.handleOnPress}>
-        <View
-          style={[
-            styles.checkBox,
-            this.state.checked ? styles.checked : styles.unchecked,
-          ]}
-        >
-          <Text
-            style={[
-              styles.text,
-              this.state.checked ? styles.checkedText : styles.uncheckedText,
-            ]}
-          >
-            {this.props.text}
-          </Text>
-        </View>
-      </TouchableWithoutFeedback>
+      <View style={styles.container}>
+        <BaseButton
+          text={this.props.text}
+          backgroundColor={backgroundColor}
+          style={[styles.button]}
+          textStyle={[styles.buttonText, textStyle]}
+          textShadow={true}
+          onPressOut={this.handleOnPressOut}
+        />
+      </View>
     );
   }
 }

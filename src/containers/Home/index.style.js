@@ -1,15 +1,37 @@
 import { StyleSheet } from 'react-native';
+import config from '../../utils/config';
+
+const buttonWidth = config.DEVICE_WIDTH * 0.95;
+const buttonHeight = config.DEVICE_HEIGHT * 0.13;
 
 export default StyleSheet.create({
-  symbols: {
+  button: {
+    width: buttonWidth,
+    height: buttonHeight,
+  },
+  buttonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText: {
+    fontSize: 40,
+  },
+  homeContainer: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'transparent',
+    justifyContent: 'space-around',
   },
-  symbolRow: {
-    // flex: 1,
+  menuContainer: {
+    flexDirection: 'column',
+  },
+  menuRow: {
     flexDirection: 'row',
-    // alignItems: 'center',
     justifyContent: 'center',
+  },
+  text: {
+    fontSize: 30,
+    color: '#000',
+    textAlign: 'center',
+    margin: 5,
   },
 });

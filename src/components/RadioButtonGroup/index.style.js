@@ -9,15 +9,15 @@ export default StyleSheet.create({
     height: buttonSize,
   },
   buttonText: {
-    fontSize: 40,
+    fontSize: 20,
   },
   container: {
     margin: 10,
   },
-  textChecked: {
+  textSelected: {
     color: '#9F6CE3',
   },
-  textUnchecked: {
+  textUnselected: {
     color: '#FFE320',
   },
 });

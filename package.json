@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "clean": "node node_modules/react-native/local-cli/cli.js start --reset-cache",
+    "clean":
+      "node node_modules/react-native/local-cli/cli.js start --reset-cache",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
     "android": "node node_modules/react-native/local-cli/cli.js run-android",
     "test": "jest"
@@ -34,5 +35,8 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "rnpm": {
+    "assets": ["./src/assets/fonts/"]
   }
 }

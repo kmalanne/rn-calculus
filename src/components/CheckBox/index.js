@@ -6,33 +6,38 @@ import styles from './index.style';
 
 @observer
 export default class CheckBox extends Component {
+  static defaultProps = {
+    text: '',
+  };
+
   constructor() {
     super();
     this.state = { isChecked: false };
   }
 
   handleOnPressOut = () => {
-    const { onChecked } = this.props;
+    const { onChecked, text } = this.props;
+
     this.setState({ isChecked: !this.state.isChecked });
+
     if (onChecked) {
-      onChecked(this.props.text);
+      onChecked(text);
     }
   };
 
   render() {
+    const { text } = this.props;
     const { isChecked } = this.state;
 
     const backgroundColor = isChecked ? '#FFE320' : '#9F6CE3';
 
-    const textStyle = isChecked ? styles.textChecked : styles.textUnisChecked;
-
     return (
       <View style={styles.container}>
         <BaseButton
-          text={this.props.text}
+          text={text}
           backgroundColor={backgroundColor}
           style={[styles.button]}
-          textStyle={[styles.buttonText, textStyle]}
+          textStyle={[styles.buttonText]}
           textShadow={true}
           onPressOut={this.handleOnPressOut}
         />

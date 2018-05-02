@@ -1,36 +1,30 @@
 import { observable, action } from 'mobx';
-
-const getOperationBySymbol = symbol => {
-  switch (symbol) {
-    case '+':
-      return 'plus';
-    case '-':
-      return 'minus';
-    case 'x':
-      return 'times';
-    case '÷':
-      return 'obulus';
-    default:
-      return '';
-  }
-};
+import { getOperationBySymbol } from '../utils/math';
 
 export default class GameStore {
   @observable
-  symbols = { plus: false, minus: false, obelus: false, times: false };
-  @observable difficulty = 0;
+  operations = { add: false, subtract: false, multiply: false, divide: false };
+  @observable difficulty = 0; // 0: easy, 1: medium, 2: hard
   @observable score = 0;
   @observable isGameRunning = false;
   @observable isGameOver = false;
 
   @action
-  toggleSymbol = symbol => {
+  toggleOperation = symbol => {
     const key = getOperationBySymbol(symbol);
-    this.symbols[key] = !this.symbols[key];
+    this.operations[key] = !this.operations[key];
   };
 
   @action
   toggleDifficulty = difficulty => {
     this.difficulty = difficulty;
   };
+
+  get difficulty() {
+    return this.difficulty;
+  }
+
+  get operations() {
+    return this.operations;
+  }
 }

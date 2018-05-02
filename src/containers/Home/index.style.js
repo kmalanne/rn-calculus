@@ -29,7 +29,8 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    fontSize: 30,
+    fontSize: 35,
+    fontWeight: 'bold',
     color: '#000',
     textAlign: 'center',
     margin: 5,

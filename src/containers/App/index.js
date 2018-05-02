@@ -4,7 +4,7 @@ import { View } from 'react-native-animatable';
 import { inject, observer } from 'mobx-react/native';
 import backgroundImg from '../../assets/images/background.jpg';
 import Home from '../Home';
-// import Game from '../Game';
+import Game from '../Game';
 // import GameOver from '../GameOver';
 import styles from './index.style';
 
@@ -19,9 +19,9 @@ export default class App extends Component {
       case 'HOME':
         content = <Home />;
         break;
-      // case 'GAME':
-      //   content = <Game />;
-      //   break;
+      case 'GAME':
+        content = <Game />;
+        break;
       // case 'GAME_OVER':
       //   content = <GameOver />;
       //   break;

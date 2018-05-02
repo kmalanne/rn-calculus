@@ -7,17 +7,18 @@ import BaseText from '../../components/BaseText';
 import RadioButtonGroup from '../../components/RadioButtonGroup';
 import BaseButton from '../../components/BaseButton';
 import styles from './index.style';
+import { ADD, SUBTRACT, MULTIPLY, DIVIDE } from '../../utils/constants';
 
 @inject(stores => ({
   routeToGame: stores.router.routeToGame,
-  toggleSymbol: stores.game.toggleSymbol,
+  toggleOperation: stores.game.toggleOperation,
   toggleDifficulty: stores.game.toggleDifficulty,
   difficulty: stores.game.difficulty,
 }))
 @observer
 export default class Home extends Component {
   handleSymbolPress = symbol => {
-    this.props.toggleSymbol(symbol);
+    this.props.toggleOperation(symbol);
   };
 
   handleDifficultyPress = difficulty => {
@@ -35,12 +36,12 @@ export default class Home extends Component {
           <View>
             <BaseText style={styles.text}>Choose calculus</BaseText>
             <View style={styles.menuRow}>
-              <CheckBox text={'+'} onChecked={this.handleSymbolPress} />
-              <CheckBox text={'-'} onChecked={this.handleSymbolPress} />
+              <CheckBox text={ADD} onChecked={this.handleSymbolPress} />
+              <CheckBox text={SUBTRACT} onChecked={this.handleSymbolPress} />
             </View>
             <View style={styles.menuRow}>
-              <CheckBox text={'x'} onChecked={this.handleSymbolPress} />
-              <CheckBox text={'÷'} onChecked={this.handleSymbolPress} />
+              <CheckBox text={MULTIPLY} onChecked={this.handleSymbolPress} />
+              <CheckBox text={DIVIDE} onChecked={this.handleSymbolPress} />
             </View>
           </View>
           <View>

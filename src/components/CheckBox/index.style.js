@@ -10,14 +10,9 @@ export default StyleSheet.create({
   },
   buttonText: {
     fontSize: 40,
+    fontFamily: 'System',
   },
   container: {
     margin: 10,
-  },
-  textChecked: {
-    color: '#9F6CE3',
-  },
-  textUnchecked: {
-    color: '#FFE320',
   },
 });

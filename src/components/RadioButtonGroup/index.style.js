@@ -14,10 +14,4 @@ export default StyleSheet.create({
   container: {
     margin: 10,
   },
-  textSelected: {
-    color: '#9F6CE3',
-  },
-  textUnselected: {
-    color: '#FFE320',
-  },
 });

@@ -5,8 +5,9 @@ import { inject, observer } from 'mobx-react/native';
 import backgroundImg from '../../assets/images/background.jpg';
 import Home from '../Home';
 import Game from '../Game';
-// import GameOver from '../GameOver';
+import GameOver from '../GameOver';
 import styles from './index.style';
+import { HOME, GAME, GAME_OVER } from '../../utils/constants';
 
 @inject(stores => ({
   currentScreen: stores.router.currentScreen,
@@ -16,15 +17,15 @@ export default class App extends Component {
   render() {
     let content;
     switch (this.props.currentScreen) {
-      case 'HOME':
+      case HOME:
         content = <Home />;
         break;
-      case 'GAME':
+      case GAME:
         content = <Game />;
         break;
-      // case 'GAME_OVER':
-      //   content = <GameOver />;
-      //   break;
+      case GAME_OVER:
+        content = <GameOver />;
+        break;
       default:
         content = <View />;
         break;

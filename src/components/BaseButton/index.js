@@ -12,6 +12,7 @@ export default class BaseButton extends Component {
   static defaultProps = {
     shadowDepth: 6,
     backgroundColor: '#9F6CE3',
+    disabledBackgroundColor: '#9A9A9A',
     text: '',
     textShadow: false,
     isEnabled: true,
@@ -24,10 +25,6 @@ export default class BaseButton extends Component {
     super();
     this.state = { isTouched: false, isPressed: false };
   }
-
-  buttonRef = null;
-
-  getbuttonRef = () => this.buttonRef;
 
   handlePressIn = () => {
     const { isEnabled, isSinglePress, onPressIn } = this.props;
@@ -60,30 +57,33 @@ export default class BaseButton extends Component {
 
   render() {
     const {
+      isEnabled,
       shadowDepth,
       backgroundColor,
+      disabledBackgroundColor,
       text,
       style,
       textStyle,
       textShadow,
-      ...otherProps
     } = this.props;
 
     const { isTouched } = this.state;
+
+    const bgColor = isEnabled ? backgroundColor : disabledBackgroundColor;
 
     const borderRadius = config.DEVICE_WIDTH * 0.028;
     const halfDepth = shadowDepth / 2;
 
     const buttonStyle = {
       marginTop: isTouched ? shadowDepth : halfDepth,
-      backgroundColor,
+      backgroundColor: bgColor,
       borderRadius,
     };
 
     const shadowDepthStyle = {
       marginTop: -borderRadius,
       height: isTouched ? halfDepth + borderRadius : shadowDepth + borderRadius,
-      backgroundColor: shadeColor(backgroundColor, -0.3),
+      backgroundColor: shadeColor(bgColor, -0.3),
       borderBottomLeftRadius: borderRadius,
       borderBottomRightRadius: borderRadius,
     };
@@ -94,12 +94,7 @@ export default class BaseButton extends Component {
         onPressOut={this.handlePressOut}
         delayPressIn={0}
       >
-        <View
-          ref={ref => {
-            this.buttonRef = ref;
-          }}
-          {...otherProps}
-        >
+        <View>
           <View style={[styles.button, style, buttonStyle]}>
             <BaseText style={[styles.text, textStyle]} shadow={textShadow}>
               {text}

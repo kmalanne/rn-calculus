@@ -1,17 +1,18 @@
 import { observable } from 'mobx';
+import { HOME, GAME, GAME_OVER } from '../utils/constants';
 
 export default class RouterStore {
-  @observable currentScreen = 'HOME';
+  @observable currentScreen = HOME;
 
   routeToHome = () => {
-    this.currentScreen = 'HOME';
+    this.currentScreen = HOME;
   };
 
   routeToGame = () => {
-    this.currentScreen = 'GAME';
+    this.currentScreen = GAME;
   };
 
   routeToGameOver = () => {
-    this.currentScreen = 'GAME_OVER';
+    this.currentScreen = GAME_OVER;
   };
 }

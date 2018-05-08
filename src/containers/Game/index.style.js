@@ -1,26 +1,30 @@
 import { StyleSheet } from 'react-native';
-// import config from '../../utils/config';
 
 export default StyleSheet.create({
-  answerContainer: {
-    flexDirection: 'column',
-    margin: 15,
-  },
-  answerTextContainer: {
-    flexDirection: 'row',
-  },
-  formulaContainer: {
-    flexDirection: 'row',
-  },
   gameContainer: {
     flex: 1,
     flexDirection: 'column',
   },
-  numpadContainer: {
-    flex: 1,
+  numberBoardContainer: {
+    flex: 3,
     justifyContent: 'flex-end',
   },
+  questionContainer: {
+    flex: 2,
+    justifyContent: 'center',
+    marginRight: 20,
+    marginLeft: 20,
+  },
+  questionTextContainer: {
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 20,
+  },
+  statsContainer: {
+    flex: 1,
+    flexDirection: 'row',
+  },
   text: {
-    fontSize: 40,
+    fontSize: 60,
   },
 });

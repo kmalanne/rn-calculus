@@ -5,7 +5,7 @@ import styles from './index.style';
 import config from '../../utils/config';
 
 const BaseText = props => {
-  const { style, shadow, ...otherProps } = props;
+  const { style, shadow } = props;
   const fontSize = StyleSheet.flatten(style).fontSize || 20;
   const scaledFontSize = Math.round(fontSize * config.DEVICE_WIDTH / 375);
 
@@ -20,7 +20,6 @@ const BaseText = props => {
   return (
     <Text
       style={[styles.text, style, shadowStyle, { fontSize: scaledFontSize }]}
-      {...otherProps}
     >
       {props.children}
     </Text>

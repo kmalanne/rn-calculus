@@ -7,13 +7,22 @@ import BaseText from '../../components/BaseText';
 import RadioButtonGroup from '../../components/RadioButtonGroup';
 import BaseButton from '../../components/BaseButton';
 import styles from './index.style';
-import { ADD, SUBTRACT, MULTIPLY, DIVIDE } from '../../utils/constants';
+import {
+  ADD,
+  SUBTRACT,
+  MULTIPLY,
+  DIVIDE,
+  EASY,
+  MEDIUM,
+  HARD,
+} from '../../utils/constants';
 
 @inject(stores => ({
   routeToGame: stores.router.routeToGame,
   toggleOperation: stores.game.toggleOperation,
   toggleDifficulty: stores.game.toggleDifficulty,
   difficulty: stores.game.difficulty,
+  isOperationSelected: stores.game.isOperationSelected,
 }))
 @observer
 export default class Home extends Component {
@@ -30,6 +39,8 @@ export default class Home extends Component {
   };
 
   render() {
+    const { isOperationSelected, difficulty } = this.props;
+
     return (
       <View style={styles.homeContainer}>
         <View style={styles.menuContainer}>
@@ -48,12 +59,8 @@ export default class Home extends Component {
             <BaseText style={styles.text}>Choose difficulty</BaseText>
             <RadioButtonGroup
               style={styles.menuRow}
-              radioButtons={[
-                { text: 'Easy' },
-                { text: 'Medium' },
-                { text: 'Hard' },
-              ]}
-              selectedIndex={this.props.difficulty}
+              radioButtons={[{ text: EASY }, { text: MEDIUM }, { text: HARD }]}
+              selectedIndex={difficulty}
               onChecked={this.handleDifficultyPress}
             />
           </View>
@@ -65,7 +72,7 @@ export default class Home extends Component {
             textStyle={styles.buttonText}
             textShadow={true}
             onPressOut={this.handleStartPress}
-            isSinglePress={true}
+            isEnabled={isOperationSelected}
           />
         </View>
       </View>

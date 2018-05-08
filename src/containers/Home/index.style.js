@@ -23,6 +23,7 @@ export default StyleSheet.create({
   },
   menuContainer: {
     flexDirection: 'column',
+    justifyContent: 'flex-start',
   },
   menuRow: {
     flexDirection: 'row',

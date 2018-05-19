@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native';
-import config from '../../utils/config';
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '../../utils/dimensions';
+import { SECONDARY_COLOR } from '../../utils/color';
 
-const buttonWidth = config.DEVICE_WIDTH * 0.95;
-const buttonHeight = config.DEVICE_HEIGHT * 0.13;
+const buttonWidth = DEVICE_WIDTH * 0.95;
+const buttonHeight = DEVICE_HEIGHT * 0.13;
 
 export default StyleSheet.create({
   button: {
@@ -32,7 +33,7 @@ export default StyleSheet.create({
   text: {
     fontSize: 35,
     fontWeight: 'bold',
-    color: '#000',
+    color: SECONDARY_COLOR,
     textAlign: 'center',
     margin: 5,
   },

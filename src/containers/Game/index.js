@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { LayoutAnimation } from 'react-native';
 import { View } from 'react-native-animatable';
 import { inject, observer } from 'mobx-react/native';
 import BaseText from '../../components/BaseText';
@@ -13,8 +12,10 @@ import styles from './index.style';
   handleAnswer: stores.game.handleAnswer,
   question: stores.game.question,
   answerOptions: stores.game.answerOptions,
+  answerResult: stores.game.answerResult,
   score: stores.game.score,
   timer: stores.game.timerValue,
+  isGameRunning: stores.game.isGameRunning,
 }))
 @observer
 export default class Game extends Component {
@@ -22,12 +23,29 @@ export default class Game extends Component {
     this.props.startGame();
   };
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.isGameRunning && !this.props.isGameRunning) {
+      this.props.routeToGameOver();
+    }
+  }
+
   handleButtonPress = number => {
     this.props.handleAnswer(number);
   };
 
   render() {
-    const { answerOptions, question, score, timer } = this.props;
+    const { answerOptions, answerResult, question, score, timer } = this.props;
+
+    let text = '';
+    let textStyle = {};
+    if (answerResult === undefined) {
+      text = question;
+    } else {
+      text = answerResult ? 'CORRECT' : 'WRONG';
+      textStyle = answerResult
+        ? styles.correctResultText
+        : styles.wrongResultText;
+    }
 
     return (
       <View style={styles.gameContainer}>
@@ -35,9 +53,9 @@ export default class Game extends Component {
           <InfoBox header={'SCORE'} text={score} />
           <InfoBox header={'TIME LEFT'} text={timer} />
         </View>
-        <View style={styles.questionContainer}>
-          <View style={styles.questionTextContainer}>
-            <BaseText style={styles.text}>{question}</BaseText>
+        <View style={styles.textContainer}>
+          <View style={styles.textBoxContainer}>
+            <BaseText style={[styles.text, textStyle]}>{text}</BaseText>
           </View>
         </View>
         <View style={styles.numberBoardContainer}>

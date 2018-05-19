@@ -1,6 +1,5 @@
-// Modified from https://stackoverflow.com/questions/5560248/programmatically-lighten-or-darken-a-hex-color-or-rgb-and-blend-colors
-
 /* eslint-disable */
+// Modified from https://stackoverflow.com/questions/5560248/programmatically-lighten-or-darken-a-hex-color-or-rgb-and-blend-colors
 export const shadeColor = (color, percent) => {
   const f = parseInt(color.slice(1), 16);
   const t = percent < 0 ? 0 : 255;
@@ -18,6 +17,9 @@ export const shadeColor = (color, percent) => {
     .slice(1)}`;
 };
 /* eslint-enable */
+
+export const MAIN_COLOR = '#9F6CE3';
+export const SECONDARY_COLOR = '#FFE320';
 
 export default {
   shadeColor,

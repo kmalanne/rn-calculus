@@ -3,6 +3,7 @@ import { View } from 'react-native-animatable';
 import { observer } from 'mobx-react/native';
 import BaseButton from '../BaseButton';
 import styles from './index.style';
+import { MAIN_COLOR } from '../../utils/color';
 
 @observer
 class NumberButton extends Component {
@@ -21,7 +22,7 @@ class NumberButton extends Component {
   render() {
     const { buttonStyle, number } = this.props;
 
-    const backgroundColor = '#9F6CE3';
+    const backgroundColor = MAIN_COLOR;
 
     return (
       <View style={styles.buttonContainer}>
@@ -29,7 +30,7 @@ class NumberButton extends Component {
           text={number.toString()}
           backgroundColor={backgroundColor}
           style={[styles.button, buttonStyle]}
-          textStyle={[styles.buttonText]}
+          textStyle={styles.buttonText}
           textShadow={true}
           onPressOut={this.handleOnPressOut}
         />

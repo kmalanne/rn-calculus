@@ -32,7 +32,6 @@ export default class App extends Component {
     }
 
     return (
-      // <Text>derp</Text>
       <ImageBackground source={backgroundImg} style={styles.container}>
         <StatusBar hidden={true} />
         {content}

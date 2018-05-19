@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { LayoutAnimation } from 'react-native';
 import { View } from 'react-native-animatable';
 import { inject, observer } from 'mobx-react/native';
 import CheckBox from '../../components/CheckBox';
@@ -19,6 +18,7 @@ import {
 
 @inject(stores => ({
   routeToGame: stores.router.routeToGame,
+  resetGame: stores.game.resetGame,
   toggleOperation: stores.game.toggleOperation,
   toggleDifficulty: stores.game.toggleDifficulty,
   difficulty: stores.game.difficulty,
@@ -26,6 +26,10 @@ import {
 }))
 @observer
 export default class Home extends Component {
+  componentDidMount = () => {
+    this.props.resetGame();
+  };
+
   handleSymbolPress = symbol => {
     this.props.toggleOperation(symbol);
   };
@@ -45,7 +49,9 @@ export default class Home extends Component {
       <View style={styles.homeContainer}>
         <View style={styles.menuContainer}>
           <View>
-            <BaseText style={styles.text}>Choose calculus</BaseText>
+            <BaseText style={styles.text} shadow={true}>
+              Choose calculus
+            </BaseText>
             <View style={styles.menuRow}>
               <CheckBox text={ADD} onChecked={this.handleSymbolPress} />
               <CheckBox text={SUBTRACT} onChecked={this.handleSymbolPress} />
@@ -56,7 +62,9 @@ export default class Home extends Component {
             </View>
           </View>
           <View>
-            <BaseText style={styles.text}>Choose difficulty</BaseText>
+            <BaseText style={styles.text} shadow={true}>
+              Choose difficulty
+            </BaseText>
             <RadioButtonGroup
               style={styles.menuRow}
               radioButtons={[{ text: EASY }, { text: MEDIUM }, { text: HARD }]}

@@ -4,14 +4,14 @@ import { View } from 'react-native-animatable';
 import { observer } from 'mobx-react/native';
 import BaseText from '../BaseText';
 import styles from './index.style';
-import config from '../../utils/config';
-import { shadeColor } from '../../utils/color';
+import { DEVICE_WIDTH } from '../../utils/dimensions';
+import { shadeColor, MAIN_COLOR } from '../../utils/color';
 
 @observer
 export default class BaseButton extends Component {
   static defaultProps = {
     shadowDepth: 6,
-    backgroundColor: '#9F6CE3',
+    backgroundColor: MAIN_COLOR,
     disabledBackgroundColor: '#9A9A9A',
     text: '',
     textShadow: false,
@@ -71,7 +71,7 @@ export default class BaseButton extends Component {
 
     const bgColor = isEnabled ? backgroundColor : disabledBackgroundColor;
 
-    const borderRadius = config.DEVICE_WIDTH * 0.028;
+    const borderRadius = DEVICE_WIDTH * 0.028;
     const halfDepth = shadowDepth / 2;
 
     const buttonStyle = {

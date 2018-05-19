@@ -2,12 +2,12 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Text } from 'react-native-animatable';
 import styles from './index.style';
-import config from '../../utils/config';
+import { DEVICE_WIDTH } from '../../utils/dimensions';
 
 const BaseText = props => {
   const { style, shadow } = props;
   const fontSize = StyleSheet.flatten(style).fontSize || 20;
-  const scaledFontSize = Math.round(fontSize * config.DEVICE_WIDTH / 375);
+  const scaledFontSize = Math.round(fontSize * DEVICE_WIDTH / 375);
 
   const shadowStyle = shadow
     ? {

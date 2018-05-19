@@ -123,6 +123,7 @@ export default class GameStore {
   @observable question = '';
   @observable answer = 0;
   @observable answerOptions = [];
+  @observable answerResult = undefined;
 
   @observable score = 0;
 
@@ -130,7 +131,6 @@ export default class GameStore {
   @observable timerValue = 60;
 
   @observable isGameRunning = false;
-  @observable isGameOver = false;
 
   get difficulty() {
     return this.difficulty;
@@ -150,6 +150,14 @@ export default class GameStore {
 
   get answerOptions() {
     return this.answerOptions;
+  }
+
+  get answerResult() {
+    return this.answerResult;
+  }
+
+  get isGameRunning() {
+    return this.isGameRunning;
   }
 
   @computed
@@ -188,6 +196,7 @@ export default class GameStore {
   @action
   startGame = () => {
     this.isGameRunning = true;
+    this.timerValue = 2;
     this.score = 0;
     this.startTimer();
     this.createQuestion();
@@ -196,10 +205,11 @@ export default class GameStore {
   @action
   startTimer = () => {
     clearInterval(this.timer);
+
     this.timer = setInterval(() => {
       this.timerValue -= 1;
 
-      if (this.timerValue === 0) {
+      if (this.timerValue <= 0) {
         clearInterval(this.timer);
         this.isGameRunning = false;
       }
@@ -209,7 +219,28 @@ export default class GameStore {
   @action
   handleAnswer = answer => {
     if (answer === this.answer) {
-      this.createQuestion();
+      this.score += 1;
+      this.timerValue += 1;
+      this.answerResult = true;
+    } else {
+      this.answerResult = false;
+      this.timerValue -= 2;
     }
+
+    setTimeout(() => {
+      this.answerResult = undefined;
+      this.createQuestion();
+    }, 500);
+  };
+
+  @action
+  resetGame = () => {
+    this.difficulty = 0;
+    this.operations = {
+      add: false,
+      subtract: false,
+      multiply: false,
+      divide: false,
+    };
   };
 }

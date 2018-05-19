@@ -3,6 +3,7 @@ import { View } from 'react-native-animatable';
 import { observer } from 'mobx-react/native';
 import BaseButton from '../BaseButton';
 import styles from './index.style';
+import { MAIN_COLOR, SECONDARY_COLOR } from '../../utils/color';
 
 @observer
 class RadioButton extends Component {
@@ -22,15 +23,15 @@ class RadioButton extends Component {
   render() {
     const { isSelected, text } = this.props;
 
-    const backgroundColor = isSelected ? '#FFE320' : '#9F6CE3';
+    const backgroundColor = isSelected ? SECONDARY_COLOR : MAIN_COLOR;
 
     return (
       <View style={styles.container}>
         <BaseButton
           text={text}
           backgroundColor={backgroundColor}
-          style={[styles.button]}
-          textStyle={[styles.buttonText]}
+          style={styles.button}
+          textStyle={styles.buttonText}
           textShadow={true}
           onPressOut={this.handleOnPressOut}
         />

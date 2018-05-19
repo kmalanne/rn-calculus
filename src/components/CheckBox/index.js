@@ -3,6 +3,7 @@ import { View } from 'react-native-animatable';
 import { observer } from 'mobx-react/native';
 import BaseButton from '../BaseButton';
 import styles from './index.style';
+import { MAIN_COLOR, SECONDARY_COLOR } from '../../utils/color';
 
 @observer
 export default class CheckBox extends Component {
@@ -29,15 +30,15 @@ export default class CheckBox extends Component {
     const { text } = this.props;
     const { isChecked } = this.state;
 
-    const backgroundColor = isChecked ? '#FFE320' : '#9F6CE3';
+    const backgroundColor = isChecked ? SECONDARY_COLOR : MAIN_COLOR;
 
     return (
       <View style={styles.container}>
         <BaseButton
           text={text}
           backgroundColor={backgroundColor}
-          style={[styles.button]}
-          textStyle={[styles.buttonText]}
+          style={styles.button}
+          textStyle={styles.buttonText}
           textShadow={true}
           onPressOut={this.handleOnPressOut}
         />

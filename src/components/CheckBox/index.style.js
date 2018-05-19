@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
-import config from '../../utils/config';
+import { DEVICE_WIDTH } from '../../utils/dimensions';
 
-const buttonSize = config.DEVICE_WIDTH * 0.23;
+const buttonSize = DEVICE_WIDTH * 0.23;
 
 export default StyleSheet.create({
   button: {
@@ -10,7 +10,6 @@ export default StyleSheet.create({
   },
   buttonText: {
     fontSize: 40,
-    fontFamily: 'System',
   },
   container: {
     margin: 10,

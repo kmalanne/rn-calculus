@@ -196,7 +196,7 @@ export default class GameStore {
   @action
   startGame = () => {
     this.isGameRunning = true;
-    this.timerValue = 2;
+    this.timerValue = 60;
     this.score = 0;
     this.startTimer();
     this.createQuestion();

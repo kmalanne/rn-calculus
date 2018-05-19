@@ -7,19 +7,19 @@ import styles from './index.style';
 @observer
 export default class InfoBox extends Component {
   static defaultProps = {
-    header: '',
-    text: '',
+    headerText: '',
+    contentText: '',
   };
 
   render() {
-    const { header, text } = this.props;
+    const { headerText, contentText } = this.props;
 
     return (
       <View style={styles.container}>
         <BaseText style={[styles.headerText, styles.text]} shadow={true}>
-          {header}
+          {headerText}
         </BaseText>
-        <BaseText style={styles.text}>{text}</BaseText>
+        <BaseText style={styles.text}>{contentText}</BaseText>
       </View>
     );
   }

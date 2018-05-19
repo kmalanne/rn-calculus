@@ -38,7 +38,10 @@ export default class Home extends Component {
     this.props.toggleDifficulty(difficulty);
   };
 
-  handleStartPress = () => {
+  handleStartPress = async () => {
+    if (this.containerRef) {
+      await this.containerRef.fadeOutLeft(400);
+    }
     this.props.routeToGame();
   };
 

@@ -8,11 +8,11 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  headerText: {
-    color: SECONDARY_COLOR,
-  },
   text: {
     fontSize: 30,
     fontWeight: 'bold',
+  },
+  headerText: {
+    color: SECONDARY_COLOR,
   },
 });

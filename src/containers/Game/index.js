@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { LayoutAnimation } from 'react-native';
 import { View } from 'react-native-animatable';
 import { inject, observer } from 'mobx-react/native';
 import BaseText from '../../components/BaseText';
@@ -19,12 +20,18 @@ import styles from './index.style';
 }))
 @observer
 export default class Game extends Component {
-  componentDidMount = () => {
+  componentDidMount = async () => {
+    if (this.containerRef) {
+      this.containerRef.bounceInRight(1000).then(() => {
+        LayoutAnimation.spring();
+      });
+    }
     this.props.startGame();
   };
 
   componentDidUpdate(prevProps) {
     if (prevProps.isGameRunning && !this.props.isGameRunning) {
+      this.containerRef.fadeOutLeft(400).then(() => {});
       this.props.routeToGameOver();
     }
   }
@@ -48,10 +55,15 @@ export default class Game extends Component {
     }
 
     return (
-      <View style={styles.gameContainer}>
+      <View
+        style={styles.gameContainer}
+        ref={ref => {
+          this.containerRef = ref;
+        }}
+      >
         <View style={styles.statsContainer}>
-          <InfoBox header={'SCORE'} text={score} />
-          <InfoBox header={'TIME LEFT'} text={timer} />
+          <InfoBox headerText={'SCORE'} contentText={score} />
+          <InfoBox headerText={'TIME LEFT'} contentText={timer} />
         </View>
         <View style={styles.textContainer}>
           <View style={styles.textBoxContainer}>

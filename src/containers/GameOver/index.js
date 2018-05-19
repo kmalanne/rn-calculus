@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { LayoutAnimation } from 'react-native';
 import { View } from 'react-native-animatable';
 import { inject, observer } from 'mobx-react/native';
 import BaseText from '../../components/BaseText';
@@ -12,6 +13,14 @@ import styles from './index.style';
 }))
 @observer
 export default class Home extends Component {
+  componentDidMount = async () => {
+    if (this.containerRef) {
+      this.containerRef.bounceInRight(1000).then(() => {
+        LayoutAnimation.spring();
+      });
+    }
+  };
+
   handleHomePress = () => {
     this.props.routeToHome();
   };
@@ -24,7 +33,12 @@ export default class Home extends Component {
     const { score } = this.props;
 
     return (
-      <View style={styles.gameOverContainer}>
+      <View
+        style={styles.gameOverContainer}
+        ref={ref => {
+          this.containerRef = ref;
+        }}
+      >
         <BaseText style={[styles.text, styles.titleText]} shadow={true}>
           GAME OVER
         </BaseText>

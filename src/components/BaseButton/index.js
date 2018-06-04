@@ -6,6 +6,7 @@ import BaseText from '../BaseText';
 import styles from './index.style';
 import { DEVICE_WIDTH } from '../../utils/dimensions';
 import { shadeColor, MAIN_COLOR } from '../../utils/color';
+import sound from '../../utils/sound';
 
 @observer
 export default class BaseButton extends Component {
@@ -33,6 +34,7 @@ export default class BaseButton extends Component {
       return;
     }
 
+    sound.playClickSound();
     LayoutAnimation.spring();
     this.setState({ isTouched: true });
 

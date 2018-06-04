@@ -1,6 +1,7 @@
 import { observable, action, computed } from 'mobx';
 import { ADD, SUBTRACT, MULTIPLY, DIVIDE } from '../utils/constants';
 import { getRandomNumber, roundToNearest, shuffleArray } from '../utils/math';
+import sound from '../utils/sound';
 
 const getOperationBySymbol = symbol => {
   switch (symbol) {
@@ -219,10 +220,12 @@ export default class GameStore {
   @action
   handleAnswer = answer => {
     if (answer === this.answer) {
+      sound.playCorrectAnswerSound();
       this.score += 1;
       this.timerValue += 1;
       this.answerResult = true;
     } else {
+      sound.playWrongAnswerSound();
       this.answerResult = false;
       this.timerValue -= 2;
     }

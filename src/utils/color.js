@@ -18,8 +18,9 @@ export const shadeColor = (color, percent) => {
 };
 /* eslint-enable */
 
-export const MAIN_COLOR = '#9F6CE3';
-export const SECONDARY_COLOR = '#FFE320';
+export const MAIN_COLOR = '#5127C6';
+export const SECONDARY_COLOR = '#2ECC71';
+export const TEXT_COLOR = '#F7F4EF';
 
 export default {
   shadeColor,

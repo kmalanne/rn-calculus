@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   correctResultText: {
-    color: '#329E41',
+    color: '#2ECC71',
   },
   gameContainer: {
     flex: 1,

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { SECONDARY_COLOR } from '../../utils/color';
+import { TEXT_COLOR } from '../../utils/color';
 
 export default StyleSheet.create({
   container: {
@@ -13,6 +13,6 @@ export default StyleSheet.create({
     fontWeight: 'bold',
   },
   headerText: {
-    color: SECONDARY_COLOR,
+    color: TEXT_COLOR,
   },
 });

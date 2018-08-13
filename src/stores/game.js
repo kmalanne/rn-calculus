@@ -137,10 +137,6 @@ export default class GameStore {
     return this.difficulty;
   }
 
-  get operations() {
-    return this.operations;
-  }
-
   get question() {
     return this.question;
   }
@@ -159,6 +155,22 @@ export default class GameStore {
 
   get isGameRunning() {
     return this.isGameRunning;
+  }
+
+  get score() {
+    return this.score;
+  }
+
+  get bestScore() {
+    return this.bestScore;
+  }
+
+  get timer() {
+    return this.timer;
+  }
+
+  get timerValue() {
+    return this.timerValue;
   }
 
   @computed
@@ -199,8 +211,15 @@ export default class GameStore {
     this.isGameRunning = true;
     this.timerValue = 60;
     this.score = 0;
+
     this.startTimer();
     this.createQuestion();
+  };
+
+  @action
+  stopGame = () => {
+    clearInterval(this.timer);
+    this.isGameRunning = false;
   };
 
   @action
@@ -211,8 +230,7 @@ export default class GameStore {
       this.timerValue -= 1;
 
       if (this.timerValue <= 0) {
-        clearInterval(this.timer);
-        this.isGameRunning = false;
+        this.stopGame();
       }
     }, 1000);
   };
@@ -227,7 +245,7 @@ export default class GameStore {
     } else {
       sound.playWrongAnswerSound();
       this.answerResult = false;
-      this.timerValue -= 2;
+      this.timerValue = this.timerValue <= 0 ? 0 : this.timerValue - 2;
     }
 
     setTimeout(() => {

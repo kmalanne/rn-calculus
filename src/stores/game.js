@@ -1,6 +1,11 @@
 import { observable, action, computed } from 'mobx';
 import { ADD, SUBTRACT, MULTIPLY, DIVIDE } from '../utils/constants';
-import { getRandomNumber, roundToNearest, shuffleArray } from '../utils/math';
+import {
+  getRandomNumber,
+  getRandomNumberBetween,
+  roundToNearest,
+  shuffleArray,
+} from '../utils/math';
 import sound from '../utils/sound';
 
 const getOperationBySymbol = symbol => {
@@ -65,11 +70,22 @@ const createNumbers = (symbol, max) => {
     secondNumber = tmp;
   }
 
-  if (symbol === DIVIDE && firstNumber % secondNumber !== 0) {
+  if (
+    symbol === DIVIDE &&
+    (firstNumber % secondNumber !== 0 ||
+      firstNumber === secondNumber ||
+      firstNumber === 0 ||
+      secondNumber === 0)
+  ) {
     do {
       firstNumber = getRandomNumber(max);
       secondNumber = getRandomNumber(max2);
-    } while (firstNumber % secondNumber !== 0);
+    } while (
+      firstNumber % secondNumber !== 0 ||
+      firstNumber === secondNumber ||
+      firstNumber === 0 ||
+      secondNumber === 0
+    );
   }
 
   return { firstNumber, secondNumber };
@@ -95,16 +111,28 @@ const createAnswerOptions = answer => {
   options.push(answer);
 
   let max = 0;
+  let min = 0;
   if (answer <= 10) {
     max = 10;
   } else if (answer <= 100) {
-    max = roundToNearest(answer, 10);
+    max = roundToNearest(answer + 10, 10);
+    min = max - 20 < 0 ? 0 : max - 20;
   } else {
-    max = roundToNearest(answer, 100);
+    let nearest = 100;
+    if (answer > 1000) {
+      nearest = 1000;
+    }
+
+    if (answer > 10000) {
+      nearest = 10000;
+    }
+
+    max = roundToNearest(answer, nearest);
+    min = max - nearest;
   }
 
   do {
-    const number = getRandomNumber(max);
+    const number = getRandomNumberBetween(min, max);
 
     if (options.indexOf(number) === -1) {
       options.push(number);
@@ -194,7 +222,8 @@ export default class GameStore {
   @action
   createQuestion = () => {
     const symbols = getSymbols(this.operations);
-    const symbol = symbols[getRandomNumber(symbols.length - 1)];
+    const index = getRandomNumberBetween(0, symbols.length - 1);
+    const symbol = symbols[index];
 
     const max = getMaxByDifficulty(this.difficulty);
 
@@ -241,6 +270,9 @@ export default class GameStore {
       sound.playCorrectAnswerSound();
       this.score += 1;
       this.timerValue += 1;
+      if (this.timerValue > 60) {
+        this.timerValue = 60;
+      }
       this.answerResult = true;
     } else {
       sound.playWrongAnswerSound();

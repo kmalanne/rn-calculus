@@ -1,6 +1,9 @@
 export const getRandomNumber = max =>
   Math.floor(Math.random() * Math.floor(max));
 
+export const getRandomNumberBetween = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+
 /* eslint-disable */
 export const shuffleArray = arr => {
   const array = arr.slice(0);
@@ -16,9 +19,3 @@ export const shuffleArray = arr => {
 
 export const roundToNearest = (number, toRound) =>
   Math.round(number / toRound) * toRound;
-
-export default {
-  getRandomNumber,
-  shuffleArray,
-  roundToNearest,
-};

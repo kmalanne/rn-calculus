@@ -46,15 +46,8 @@ export default class RadioButtonGroup extends Component {
     radioButtons: [],
   };
 
-  constructor(props) {
-    super(props);
-    this.state = { selectedIndex: this.props.selectedIndex };
-  }
-
   handleRadioButtonPress = index => {
     const { onChecked } = this.props;
-
-    this.setState({ selectedIndex: index });
 
     if (onChecked) {
       onChecked(index);
@@ -70,7 +63,7 @@ export default class RadioButtonGroup extends Component {
         onPress={this.handleRadioButtonPress}
         text={radioButton.text}
         index={index}
-        isSelected={this.state.selectedIndex === index}
+        isSelected={this.props.selectedIndex === index}
       />
     ));
 

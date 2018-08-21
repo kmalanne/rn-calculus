@@ -16,6 +16,3 @@ export const shuffleArray = arr => {
   return array;
 };
 /* eslint-enable */
-
-export const roundToNearest = (number, toRound) =>
-  Math.round(number / toRound) * toRound;

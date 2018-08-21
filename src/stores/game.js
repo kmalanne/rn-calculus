@@ -3,7 +3,6 @@ import { ADD, SUBTRACT, MULTIPLY, DIVIDE } from '../utils/constants';
 import {
   getRandomNumber,
   getRandomNumberBetween,
-  roundToNearest,
   shuffleArray,
 } from '../utils/math';
 import sound from '../utils/sound';
@@ -114,21 +113,15 @@ const createAnswerOptions = answer => {
   let min = 0;
   if (answer <= 10) {
     max = 10;
-  } else if (answer <= 100) {
-    max = roundToNearest(answer + 10, 10);
-    min = max - 20 < 0 ? 0 : max - 20;
+  } else if (answer > 10 && answer < 100) {
+    max = Math.floor(answer * 1.2);
+    min = Math.floor(answer * 0.8);
+  } else if (answer > 100 && answer < 1000) {
+    max = Math.floor(answer * 1.02);
+    min = Math.floor(answer * 0.98);
   } else {
-    let nearest = 100;
-    if (answer > 1000) {
-      nearest = 1000;
-    }
-
-    if (answer > 10000) {
-      nearest = 10000;
-    }
-
-    max = roundToNearest(answer, nearest);
-    min = max - nearest;
+    max = Math.floor(answer * 1.04);
+    min = Math.floor(answer * 0.96);
   }
 
   do {
@@ -256,11 +249,11 @@ export default class GameStore {
     clearInterval(this.timer);
 
     this.timer = setInterval(() => {
-      this.timerValue -= 1;
-
       if (this.timerValue <= 0) {
         this.stopGame();
       }
+
+      this.timerValue -= 1;
     }, 1000);
   };
 
@@ -277,7 +270,12 @@ export default class GameStore {
     } else {
       sound.playWrongAnswerSound();
       this.answerResult = false;
-      this.timerValue = this.timerValue <= 0 ? 0 : this.timerValue - 2;
+
+      if (this.timerValue - 2 <= 0) {
+        this.timerValue = 0;
+      } else {
+        this.timerValue -= 2;
+      }
     }
 
     setTimeout(() => {

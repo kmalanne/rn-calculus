@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "clean": "node node_modules/react-native/local-cli/cli.js start --reset-cache",
+    "clean":
+      "node node_modules/react-native/local-cli/cli.js start --reset-cache",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
     "android": "node node_modules/react-native/local-cli/cli.js run-android",
     "test": "jest"
@@ -12,16 +13,17 @@
   "dependencies": {
     "mobx": "^4.1.1",
     "mobx-react": "^5.0.0",
-    "react": "16.3.0",
-    "react-native": "0.54.4",
+    "react": "16.4.1",
+    "react-native": "0.56.0",
     "react-native-animatable": "^1.2.4",
     "react-native-sound": "^0.10.9",
     "react-native-splash-screen": "^3.1.1"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-decorators": "7.0.0-beta.47",
     "babel-eslint": "^8.2.2",
     "babel-jest": "22.4.3",
-    "babel-preset-react-native": "4.0.0",
+    "babel-preset-react-native": "^5.0.2",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -37,8 +39,6 @@
     "preset": "react-native"
   },
   "rnpm": {
-    "assets": [
-      "./src/assets/fonts/"
-    ]
+    "assets": ["./src/assets/fonts/"]
   }
 }

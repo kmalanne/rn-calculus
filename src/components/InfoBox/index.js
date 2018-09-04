@@ -19,7 +19,9 @@ export default class InfoBox extends Component {
         <BaseText style={[styles.headerText, styles.text]} shadow={true}>
           {headerText}
         </BaseText>
-        <BaseText style={styles.text}>{contentText}</BaseText>
+        <BaseText style={[styles.contentText, styles.text]}>
+          {contentText}
+        </BaseText>
       </View>
     );
   }

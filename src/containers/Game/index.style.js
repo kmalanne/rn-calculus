@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 export default StyleSheet.create({
   correctResultText: {
@@ -22,6 +22,7 @@ export default StyleSheet.create({
   },
   text: {
     fontSize: 60,
+    ...(Platform.OS === 'android' && { color: '#000000' }),
   },
   textContainer: {
     flex: 2,

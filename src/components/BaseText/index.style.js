@@ -1,9 +1,7 @@
-import { StyleSheet, Platform } from 'react-native';
-
-const fontFamily = Platform.OS === "ios" ? "System Font" : "Roboto";
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   text: {
-    fontFamily,
+    fontFamily: 'System',
   },
 });

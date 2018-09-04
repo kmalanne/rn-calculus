@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { TEXT_COLOR } from '../../utils/color';
 
 export default StyleSheet.create({
@@ -11,6 +11,9 @@ export default StyleSheet.create({
   text: {
     fontSize: 30,
     fontWeight: 'bold',
+  },
+  contentText: {
+    ...(Platform.OS === 'android' && { color: '#000000' }),
   },
   headerText: {
     color: TEXT_COLOR,
